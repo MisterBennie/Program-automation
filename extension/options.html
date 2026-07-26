@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ChatGPT Folder Bridge settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <h1>ChatGPT Folder Bridge</h1>
+    <p class="lead">Create one profile per ChatGPT project. The active project controls its watched folder, upload rule, prompt, submission action, download rule, and download folder.</p>
+
+    <form id="settings-form">
+      <section>
+        <h2>Global settings</h2>
+        <label class="check"><input id="enabled" type="checkbox"> Enable the bridge</label>
+        <label>Native host name
+          <input id="hostName" type="text" spellcheck="false" required>
+        </label>
+        <p class="hint">The supplied installers register <code>com.local.chatgpt_folder_bridge</code>.</p>
+      </section>
+
+      <section>
+        <div class="section-heading">
+          <div>
+            <h2>Project profiles</h2>
+            <p class="hint">Exact project ID matches take priority, then project name, then an optional all-projects fallback.</p>
+          </div>
+          <div class="profile-actions">
+            <button type="button" id="add-current">Add current project</button>
+            <button type="button" id="add-profile">New profile</button>
+            <button type="button" id="delete-profile" class="danger">Delete</button>
+          </div>
+        </div>
+
+        <label>Profile
+          <select id="profileSelect"></select>
+        </label>
+
+        <div class="grid">
+          <label>Profile label
+            <input id="label" type="text" required>
+          </label>
+          <label>ChatGPT project name
+            <input id="projectName" type="text" placeholder="Stream">
+          </label>
+        </div>
+        <label>ChatGPT project ID or project path
+          <input id="projectId" type="text" spellcheck="false" placeholder="g-p-6a57c54adf808191be7d5f9c14dba38b-stream">
+        </label>
+        <div class="checks-row">
+          <label class="check"><input id="profileEnabled" type="checkbox"> Profile enabled</label>
+          <label class="check"><input id="matchAnyProject" type="checkbox"> Use as fallback for projects without an exact profile</label>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-heading">
+          <h2>Upload for this project</h2>
+          <label class="check compact"><input id="uploadEnabled" type="checkbox"> Enabled</label>
+        </div>
+        <label>Folder to watch
+          <input id="watchFolder" type="text" placeholder="X:\versions\failure-bundles">
+        </label>
+        <label>Upload filename pattern (regular expression)
+          <input id="uploadPattern" type="text" spellcheck="false">
+        </label>
+        <div class="grid">
+          <label>Stable for seconds
+            <input id="stableSeconds" type="number" min="1" max="120" step="1">
+          </label>
+          <label>Retry after seconds
+            <input id="retrySeconds" type="number" min="5" max="3600" step="1">
+          </label>
+          <label>Maximum file size (MB)
+            <input id="maxFileMb" type="number" min="1" max="512" step="1">
+          </label>
+          <label>Delay before submit (ms)
+            <input id="uploadDelayMs" type="number" min="0" max="60000" step="100">
+          </label>
+        </div>
+        <label>Prompt added with each file
+          <textarea id="promptText" rows="3"></textarea>
+        </label>
+        <div class="checks-row">
+          <label class="check"><input id="autoSubmit" type="checkbox"> Submit after attachment is ready</label>
+          <label class="check"><input id="recursive" type="checkbox"> Include subfolders</label>
+          <label class="check"><input id="includeExisting" type="checkbox"> Include existing files on first scan</label>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-heading">
+          <h2>Downloads for this project</h2>
+          <label class="check compact"><input id="downloadEnabled" type="checkbox"> Enabled</label>
+        </div>
+        <label>Download button text pattern (regular expression)
+          <input id="downloadPattern" type="text" spellcheck="false">
+          <small>Matched only against the complete visible button text, for example: <code>Download Stream-2026-07-25-015.zip</code>.</small>
+        </label>
+        <label>Subfolder inside Chrome Downloads
+          <input id="downloadSubfolder" type="text" placeholder="ChatGPT/Stream">
+        </label>
+        <label class="check"><input id="downloadLastOnReload" type="checkbox"> After a page reload, download the last matching button once the conversation has fully settled</label>
+      </section>
+
+      <div class="actions">
+        <button type="submit">Save settings</button>
+        <button type="button" id="test">Reconnect helper</button>
+        <span id="status" role="status"></span>
+      </div>
+    </form>
+  </main>
+  <script src="options.js"></script>
+</body>
+</html>
