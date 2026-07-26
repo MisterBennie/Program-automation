@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ChatGPT Folder Bridge</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <div class="topline">
+      <strong>Folder Bridge</strong>
+      <label class="switch"><input id="enabled" type="checkbox"><span>Enabled</span></label>
+    </div>
+    <p id="message">Loading…</p>
+    <dl>
+      <div><dt>Project</dt><dd id="project">—</dd></div>
+      <div><dt>Profile</dt><dd id="profile">—</dd></div>
+      <div><dt>Helper</dt><dd id="helper">—</dd></div>
+      <div><dt>Queue</dt><dd id="queue">—</dd></div>
+      <div><dt>Last file</dt><dd id="lastFile">—</dd></div>
+      <div><dt>Extension</dt><dd id="extensionVersion">—</dd></div>
+      <div><dt>Page script</dt><dd id="contentVersion">—</dd></div>
+    </dl>
+    <p id="error" hidden></p>
+    <div class="buttons">
+      <button id="reconnect" class="wide">Reconnect helper</button>
+      <button id="scan">Scan result buttons</button>
+      <button id="options">Settings</button>
+    </div>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
